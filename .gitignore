@@ -1,4 +1,9 @@
-#Folder with images
-data
-
 .DS_Store
+
+#Folders with images
+data
+App Test Images
+landmark_images
+checkpoints
+static_images
+
