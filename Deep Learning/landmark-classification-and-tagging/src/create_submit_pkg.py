@@ -14,18 +14,20 @@ def create_submit_pkg():
 
     # Genereate HTML files from the notebooks
     for nb in notebooks:
-        cmd_line = f"jupyter nbconvert --to html {nb}"
+        cmd_line = f"jupyter nbconvert --to markdown {nb}"
 
         print(f"executing: {cmd_line}")
         subprocess.check_call(cmd_line, shell=True)
 
     html_files = glob.glob("*.htm*")
 
-    now = datetime.datetime.today().isoformat(timespec="minutes").replace(":", "h")+"m"
+    now = (
+        datetime.datetime.today().isoformat(timespec="minutes").replace(":", "h") + "m"
+    )
     outfile = f"submission_{now}.tar.gz"
     print(f"Adding files to {outfile}")
     with tarfile.open(outfile, "w:gz") as tar:
-        for name in (src_files + notebooks + html_files):
+        for name in src_files + notebooks + html_files:
             print(name)
             tar.add(name)
 
